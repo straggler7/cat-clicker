@@ -4,13 +4,27 @@
 
 
 (function() {
-  var clickCount = 0;
-  var countElement = document.getElementById('click-count');
+  var cats = [
+    {title: 'Meow-1', id: 'meow-1', count: 0},
+    {title: 'Meow-2', id: 'meow-2', count: 0}
+  ];
 
-  var catElement = document.getElementById('cat');
-  catElement.addEventListener('click', function(event) {
-    console.log('Cat Clicked');
-    clickCount++;
-    countElement.innerHTML = clickCount;
-  }, false);
+  for(var i = 0, len = cats.length; i < len; i++) {
+    var cat = cats[i];
+    var catElement = document.getElementById(cat.id);
+    var titleElement = document.createElement('p');
+    titleElement.innerHTML = cat.title;
+    catElement.parentNode.appendChild(titleElement);
+    catElement.addEventListener('click', updateCount(cat.id), false);
+  }
+
+  function updateCount(id) {
+    var count = 0;
+    return function(event) {
+      event.preventDefault();
+      var countElement = document.getElementById(id + '-count');
+      count++;
+      countElement.innerHTML = 'Click Count: ' + count;
+    };
+  }
 })();
