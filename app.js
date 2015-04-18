@@ -12,9 +12,8 @@
   for(var i = 0, len = cats.length; i < len; i++) {
     var cat = cats[i];
     var catElement = document.getElementById(cat.id);
-    var titleElement = document.createElement('p');
+    var titleElement = document.getElementById(cat.id + '-title');
     titleElement.innerHTML = cat.title;
-    catElement.parentNode.appendChild(titleElement);
     catElement.addEventListener('click', updateCount(cat.id), false);
   }
 
